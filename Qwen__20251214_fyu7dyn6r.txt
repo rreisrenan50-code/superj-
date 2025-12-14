@@ -1,0 +1,15 @@
+instacart-br/
+├── backend/
+│   ├── app.py
+│   ├── models.py
+│   ├── seed_data.py
+│   ├── requirements.txt
+│   ├── .env.example
+│   ├── Dockerfile
+│   └── serviceAccountKey.json  # (não versionado)
+├── frontend/ (React Native)
+│   ├── App.js
+│   ├── screens/
+│   └── services/api.js
+├── docker-compose.yml
+└── .gitignore

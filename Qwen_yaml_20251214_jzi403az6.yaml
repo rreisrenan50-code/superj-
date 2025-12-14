@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=postgresql://user:senha123@db:5432/instacart_br
+      - SECRET_KEY=sua_chave_secreta_aqui_123!
+      - MERCADO_PAGO_ACCESS_TOKEN=SEU_TOKEN_AQUI
+    volumes:
+      - ./serviceAccountKey.json:/app/serviceAccountKey.json
+    depends_on:
+      - db
+    command: >
+      sh -c "python seed_data.py && gunicorn -k gevent --bind 0.0.0.0:5000 app:app"
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: instacart_br
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: senha123
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
